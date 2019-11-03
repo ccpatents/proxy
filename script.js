@@ -20,10 +20,16 @@ function gotoServer(server, qs) {
             window.location.href = ("http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=0&p=1&f=S&l=50&Query=" + qs + "&d=PTXT");
             break;
         case 'kipris(kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), true);
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), true, false);
             break;
         case 'kipris(!kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), false);
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), false, false);
+            break;
+        case 'kipris(tm-kr)':
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), true, true);
+            break;
+        case 'kipris(tm-!kr)':
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), false, true);
             break;
         case 'escapenet-en':
         case 'escapenet-fr':
@@ -35,7 +41,7 @@ function gotoServer(server, qs) {
     }
 }
 
-function searchKipris(queryString, kr) {
+function searchKipris(queryString, kr, tm) {
     let form = document.createElement('form');
 
     let objs = document.createElement('input');
@@ -48,25 +54,33 @@ function searchKipris(queryString, kr) {
     objs.setAttribute('value', queryString.split('\"').join("&quot;"));
     form.appendChild(objs);
 
-    if (!kr) {
+    if (!kr && !tm) {
         objs = document.createElement('input');
         objs.setAttribute('name', 'collectionValues');
         objs.setAttribute('value', ['US_T.col', 'EP_T.col', 'WO_T.col', 'PAJ_T.col', 'CN_T.col', ]);
         form.appendChild(objs);
-    } 
+    }
 
     form.setAttribute('method', 'post');
-    form.setAttribute('Cookie', 'JSESSIONID=JtV3MmUbbCYZ8JVPkibxIfGrMEanqukZ4x7YDgELb1oa1VNUyWx5kqcKqctyDQdU.amV1c19kb21haW4va3BvcnRhbDQ=;');
-    if (!kr) {
-        form.setAttribute('action', "http://abpat.kipris.or.kr/abpat/resulta.do");
+    if (!tm) {
+        if (!kr) {
+            form.setAttribute('action', "http://abpat.kipris.or.kr/abpat/resulta.do");
+        } else {
+            form.setAttribute('action', "http://kpat.kipris.or.kr/kpat/resulta.do");
+        }
     } else {
-        form.setAttribute('action', "http://kpat.kipris.or.kr/kpat/resulta.do");
-    }
-    document.body.appendChild(form);
+        if (!kr) {
+            form.setAttribute('action', "http://abtm.kipris.or.kr/abtm/search/resultList.jsp");
+        } else {
+            form.setAttribute('action', "http://kdtj.kipris.or.kr/kdtj/searchLogina.do?method=loginTM&checkPot=Y");
 
+        }
+    }
+
+    document.body.appendChild(form);
     form.submit();
 
-    if (!kr) {
+    if (!kr && !tm) {
         form.setAttribute('action', "http://abpat.kipris.or.kr/abpat/searchLogina.do?next=MainSearch");
         form.submit();
     }
