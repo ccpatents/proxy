@@ -70,6 +70,7 @@ function searchKipris(queryString, kr, tm) {
         }
     } else {
         if (!kr) {
+            form.setAttribute('method', 'get');
             form.setAttribute('action', "http://abtm.kipris.or.kr/abtm/search/resultList.jsp");
         } else {
             form.setAttribute('action', "http://kdtj.kipris.or.kr/kdtj/searchLogina.do?method=loginTM&checkPot=Y");
