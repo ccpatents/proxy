@@ -20,16 +20,16 @@ function gotoServer(server, qs) {
             window.location.href = ("http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=0&p=1&f=S&l=50&Query=" + qs + "&d=PTXT");
             break;
         case 'kipris(kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), true, false);
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), true, false);
             break;
         case 'kipris(!kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), false, false);
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), false, false);
             break;
         case 'kipris(tm-kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), true, true);
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), true, true);
             break;
         case 'kipris(tm-!kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/"), false, true);
+            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), false, true);
             break;
         case 'escapenet-en':
         case 'escapenet-fr':
