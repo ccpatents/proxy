@@ -9,7 +9,7 @@ let _qs = _tempArray[1].split('qs=')[1];
 
 function load() {
     if(window.navigator.userAgent.indexOf("Edge") > -1) {
-        document.getElementsByTagName("BODY")[0].innerHTML("Edge browser is not supported.");
+        document.body.innerHTML = "엣지는 지원하지 않습니다.";
     } else {
         gotoServer(_server, _qs);
     }  
