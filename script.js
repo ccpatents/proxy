@@ -8,7 +8,11 @@ let _server = _tempArray[0].split('=')[1];
 let _qs = _tempArray[1].split('qs=')[1];
 
 function load() {
-    gotoServer(_server, _qs);
+    if(window.navigator.userAgent.indexOf("Edge") > -1) {
+        document.getElementsByTagName("BODY")[0].innerHTML("Edge browser is not supported.");
+    } else {
+        gotoServer(_server, _qs);
+    }  
 }
 
 function gotoServer(server, qs) {
