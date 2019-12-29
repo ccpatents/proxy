@@ -1,7 +1,3 @@
-let counter = 5;
-let periods = ["...", ".", ".."];
-let periods_count = 0;
-
 let _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
 let _tempArray = _tempUrl.split('!%*');
 let _server = _tempArray[0].split('=')[1];
