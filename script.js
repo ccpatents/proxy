@@ -22,6 +22,9 @@ function gotoServer(server, qs) {
         case 'uspto(app)':
             window.location.href = ("http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.html&r=0&p=1&f=S&l=50&Query=" + qs + "&d=PG01");
             break;
+        case 'uspto(tm)':
+            searchUSPTOtm(decodeURI(qs).replaceAll("\+", " "));
+            break;
         case 'kipris(kr)':
             searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), true, false);
             break;
@@ -42,6 +45,50 @@ function gotoServer(server, qs) {
         }
         default:
     }
+}
+
+function searchUSPTOtm(queryString) {
+    console.log(queryString);
+
+    let form = document.createElement('form');
+
+    let objs = document.createElement('input');
+    objs.setAttribute('name', 'f');
+    objs.setAttribute('value', 'toc');
+    form.appendChild(objs);
+
+    objs = document.createElement('input');
+    objs.setAttribute('name', 'p_d');
+    objs.setAttribute('value', 'trmk');
+    form.appendChild(objs);
+
+    objs = document.createElement('input');
+    objs.setAttribute('name', 'p_lang');
+    objs.setAttribute('value', 'english');
+    form.appendChild(objs);
+
+    objs = document.createElement('input');
+    objs.setAttribute('name', 'p_search');
+    objs.setAttribute('value', 'search');
+    form.appendChild(objs);
+
+    objs = document.createElement('input');
+    objs.setAttribute('name', 'p_s_ALL');
+    objs.setAttribute('value', queryString);
+    form.appendChild(objs);
+
+    objs = document.createElement('input');
+    objs.setAttribute('name', 'a_search');
+    objs.setAttribute('value', 'Submit Query');
+    form.appendChild(objs);
+
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', "http://tmsearch.uspto.gov/bin/gate.exe");
+
+    document.body.appendChild(form);
+    form.submit();
+
+    document.body.removeChild(form);
 }
 
 function searchKipris(queryString, kr, tm) {
