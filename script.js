@@ -22,7 +22,7 @@ function gotoServer(server, qs) {
             searchUSPTOtm(decodeURI(qs).replaceAll("\+", " "));
             break;
         case 'kipris(kr)':
-            searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), true, false);
+            searchKipris_beginner(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), true, false);
             break;
         case 'kipris(!kr)':
             searchKipris(decodeURI(qs).replaceAll("%3d", "\=").replaceAll("%2b", "\+").replaceAll("%2f", "\/").replaceAll("%3f", "\?"), false, false);
