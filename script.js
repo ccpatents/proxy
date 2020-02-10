@@ -9,6 +9,12 @@ function load() {
 
 function gotoServer(server, qs) {
     switch (server) {
+        case 'google_b':
+            window.location.href = ("https://www.google.com/search?q=" + qs);
+            break;
+        case 'google_s':
+            window.location.href = ("https://scholar.google.co.kr/scholar?as_sdt=1,5&q=" + qs);
+            break;
         case 'google':
             window.location.href = ("http://patents.google.com/?q=" + qs + "&oq=" + qs);
             break;
